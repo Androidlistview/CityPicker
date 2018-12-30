@@ -1,16 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
     defaultConfig {
         applicationId "com.zaaach.citypickerdemo"
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion build_versions.target_sdk
         versionCode 6
         versionName "2.0.3"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,8 +30,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-//    implementation 'com.android.support:design:27.1.1'
+    implementation deps.support.app_compat
+    implementation deps.support.recyclerview
+    implementation deps.support.design
     implementation project(':citypicker')
 }

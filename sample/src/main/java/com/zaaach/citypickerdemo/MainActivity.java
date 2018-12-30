@@ -10,12 +10,13 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.zaaach.citypicker.CityPicker;
-import com.zaaach.citypicker.adapter.OnPickListener;
-import com.zaaach.citypicker.model.City;
-import com.zaaach.citypicker.model.HotCity;
-import com.zaaach.citypicker.model.LocateState;
-import com.zaaach.citypicker.model.LocatedCity;
+import com.xuexiang.citypicker.CityPicker;
+import com.xuexiang.citypicker.adapter.OnLocationListener;
+import com.xuexiang.citypicker.adapter.OnPickListener;
+import com.xuexiang.citypicker.model.City;
+import com.xuexiang.citypicker.model.HotCity;
+import com.xuexiang.citypicker.model.LocateState;
+import com.xuexiang.citypicker.model.LocatedCity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         if (savedInstanceState != null) {
             theme = savedInstanceState.getInt(KEY);
-            setTheme(theme > 0 ? theme : R.style.DefaultCityPickerTheme);
+            setTheme(theme > 0 ? theme : R.style.CityPickerTheme);
         }
 
         setContentView(R.layout.activity_main);
@@ -51,9 +52,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         enableCB = findViewById(R.id.cb_enable_anim);
         themeBtn = findViewById(R.id.btn_style);
 
-        if (theme == R.style.DefaultCityPickerTheme){
+        if (theme == R.style.CityPickerTheme){
             themeBtn.setText("默认主题");
-        }else if (theme == R.style.CustomTheme){
+        }else if (theme == R.style.CityPickerTheme_Custom){
             themeBtn.setText("自定义主题");
         }
 
@@ -66,10 +67,10 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             public void onClick(View v) {
                 if (themeBtn.getText().toString().startsWith("自定义")){
                     themeBtn.setText("默认主题");
-                    theme = R.style.DefaultCityPickerTheme;
+                    theme = R.style.CityPickerTheme;
                 }else if (themeBtn.getText().toString().startsWith("默认")){
                     themeBtn.setText("自定义主题");
-                    theme = R.style.CustomTheme;
+                    theme = R.style.CityPickerTheme_Custom;
                 }
                 recreate();
             }
@@ -100,12 +101,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                             }
 
                             @Override
-                            public void onLocate() {
+                            public void onLocate(final OnLocationListener locationListener) {
                                 //开始定位，这里模拟一下定位
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        CityPicker.from(MainActivity.this).locateComplete(new LocatedCity("深圳", "广东", "101280601"), LocateState.SUCCESS);
+                                        locationListener.onLocationChanged(new LocatedCity("深圳", "广东", "101280601"), LocateState.SUCCESS);
                                     }
                                 }, 3000);
                             }
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                 }
                 break;
             case R.id.cb_anim:
-                anim = isChecked ? R.style.CustomAnim : R.style.DefaultCityPickerAnimation;
+                anim = isChecked ? R.style.CustomAnim : R.style.CityPickerAnimation;
                 break;
             case R.id.cb_enable_anim:
                 enable = isChecked;
