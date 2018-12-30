@@ -34,4 +34,6 @@ dependencies {
     implementation deps.support.recyclerview
     implementation deps.support.design
     implementation project(':citypicker')
+
+//    implementation "com.github.xuexiangjys:CityPicker:1.0.0"
 }
