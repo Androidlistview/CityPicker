@@ -40,7 +40,7 @@ allprojects {
 ```
 dependencies {
   ...
-  implementation 'com.github.xuexiangjys:citypicker:1.0.0'
+  implementation 'com.github.xuexiangjys:citypicker:1.0.1'
   implementation 'com.android.support:appcompat-v7:27.1.1'
   implementation 'com.android.support:recyclerview-v7:27.1.1'
   implementation 'com.android.support:design:27.1.1'

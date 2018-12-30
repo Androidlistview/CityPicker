@@ -32,7 +32,6 @@ import com.xuexiang.citypicker.adapter.OnLocationListener;
 import com.xuexiang.citypicker.adapter.OnPickListener;
 import com.xuexiang.citypicker.adapter.decoration.DividerItemDecoration;
 import com.xuexiang.citypicker.adapter.decoration.SectionItemDecoration;
-import com.xuexiang.citypicker.data.DBCityCenter;
 import com.xuexiang.citypicker.data.ICityCenter;
 import com.xuexiang.citypicker.model.City;
 import com.xuexiang.citypicker.model.HotCity;
@@ -322,6 +321,12 @@ public class CityPickerDialogFragment extends DialogFragment implements TextWatc
         if (mOnPickListener != null) {
             mOnPickListener.onLocate(this);
         }
+    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        ScreenUtils.hideSoftInput(mSearchBox);
     }
 
     public void setOnPickListener(OnPickListener listener) {

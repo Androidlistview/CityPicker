@@ -8,7 +8,9 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * 屏幕工具
@@ -84,5 +86,19 @@ public class ScreenUtils {
         int displayWidth = displayMetrics.widthPixels;
 
         return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
+    }
+
+    /**
+     * 动态隐藏软键盘
+     *
+     * @param view 视图
+     */
+    public static void hideSoftInput(final View view) {
+        InputMethodManager imm =
+                (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm == null) {
+            return;
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
