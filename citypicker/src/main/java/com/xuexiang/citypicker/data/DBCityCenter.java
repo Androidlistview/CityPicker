@@ -38,7 +38,7 @@ public class DBCityCenter implements ICityCenter {
     private Context mContext;
 
     public DBCityCenter(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
         mDataBasePath = File.separator + "data"
                 + Environment.getDataDirectory().getAbsolutePath() + File.separator
                 + context.getPackageName() + File.separator + "databases" + File.separator;
